@@ -3,17 +3,18 @@ package com.example.david_000.idealist_offline;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Constants.Constants;
@@ -41,6 +42,16 @@ public class MainActivity extends AppCompatActivity implements ObservableScrollV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Instantiate new databasehandler
+        db = new DatabaseHandler(this);
+
+        //Hide the toolbar
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //Instantiate the ideaList to store individual ideaList views
+        ideaList = new ArrayList<FeedItem>();
 
         //Instantiate ArrayList, List View and Adapter
         listView = (ObservableListView)findViewById(R.id.list);

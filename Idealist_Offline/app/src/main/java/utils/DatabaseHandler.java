@@ -20,7 +20,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_LIST_TABLE = "CREATE TABLE" + Constants.TABLE_LIST + "(" + Constants.IDEA_TITLE +
+        String CREATE_LIST_TABLE = "CREATE TABLE " + Constants.TABLE_LIST + "(" + Constants.IDEA_TITLE +
                 " TEXT," + Constants.IDEA_CATEGORY + " TEXT," + Constants.IDEA_TEXT + " TEXT" + ")";
         db.execSQL(CREATE_LIST_TABLE);
     }
@@ -47,7 +47,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     //Gets all the list items
     public Cursor getListItem(){
-        String selectQuery = "SELECT * FROM" + Constants.TABLE_LIST;
+        String selectQuery = "SELECT * FROM " + Constants.TABLE_LIST;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         return cursor;

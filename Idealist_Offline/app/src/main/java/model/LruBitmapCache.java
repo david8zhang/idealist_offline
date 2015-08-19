@@ -1,4 +1,4 @@
-package utils;
+package model;
 
 import com.android.volley.toolbox.ImageLoader.ImageCache;
 

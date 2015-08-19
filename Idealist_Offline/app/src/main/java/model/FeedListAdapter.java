@@ -14,8 +14,6 @@ import com.example.david_000.idealist_offline.R;
 
 import java.util.List;
 
-import utils.AppController;
-
 /**
  * Created by david_000 on 8/18/2015.
  */
