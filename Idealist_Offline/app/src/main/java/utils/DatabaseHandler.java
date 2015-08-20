@@ -41,7 +41,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(Constants.IDEA_TITLE, listItem.get("ideaTitle"));
         values.put(Constants.IDEA_CATEGORY, listItem.get("ideaCategory"));
         values.put(Constants.IDEA_TEXT, listItem.get("ideaText"));
-
+        db.insert(Constants.TABLE_LIST, null, values);
         db.close();
     }
 
@@ -55,10 +55,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     //delete something form the database
-    public boolean deleteJob(String ideaText){
+    public boolean deleteItem(String ideaText){
         SQLiteDatabase db = this.getWritableDatabase();
         String[] whereArgs = new String[] {ideaText};
         return db.delete(Constants.TABLE_LIST, Constants.IDEA_TEXT + "=?", whereArgs)>0;
+    }
 
+    public boolean editIdea(String ideaText, String editedTitle, String editedCategory, String editedText){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        String[] whereArgs = new String[]{ideaText};
+        cv.put("ideaTitle", editedTitle);
+        cv.put("ideaCategory", editedCategory);
+        cv.put("ideaText", editedText);
+        return db.update(Constants.TABLE_LIST, cv, Constants.IDEA_TEXT + "=?", whereArgs) > 0;
     }
 }

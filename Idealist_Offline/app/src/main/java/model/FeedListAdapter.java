@@ -71,7 +71,6 @@ public class FeedListAdapter extends BaseAdapter {
         } else {
             ideaCategory.setVisibility(View.GONE);
         }
-
         return convertView;
     }
 }

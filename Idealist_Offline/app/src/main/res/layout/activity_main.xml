@@ -1,51 +1,57 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_height="wrap_content"
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:background="#4CBB17">
+        android:layout_height="match_parent">
 
-        <TextView
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="IdeaList"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:paddingRight="15dp"
-            android:textSize="40sp"
-            android:id="@+id/toolbar_title"/>
+            android:background="#4CBB17">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="IdeaList"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingRight="15dp"
+                android:textSize="40sp"
+                android:id="@+id/toolbar_title"/>
 
 
-    </android.support.v7.widget.Toolbar>
+        </android.support.v7.widget.Toolbar>
 
-    <com.github.ksoichiro.android.observablescrollview.ObservableListView
-        android:id="@+id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:divider="@null">
-    </com.github.ksoichiro.android.observablescrollview.ObservableListView>
+        <com.github.ksoichiro.android.observablescrollview.ObservableListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:divider="@null">
+        </com.github.ksoichiro.android.observablescrollview.ObservableListView>
 
-    <ImageButton
-        android:id="@+id/newIdea"
-        android:layout_width="match_parent"
-        android:layout_height= "70dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="-5dp"
-        android:layout_marginRight="-7dp"
-        android:layout_marginLeft="-3dp"
-        android:background="#4CBB17"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        android:paddingTop="5dp"
-        android:paddingBottom="10dp"
-        android:src="@drawable/lightbulb" />
+        <ImageButton
+            android:id="@+id/newIdea"
+            android:layout_width="match_parent"
+            android:layout_height= "70dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="-5dp"
+            android:layout_marginRight="-7dp"
+            android:layout_marginLeft="-3dp"
+            android:background="#4CBB17"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:paddingTop="5dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/lightbulb" />
 
-</FrameLayout>
+    </FrameLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>
