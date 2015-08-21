@@ -32,13 +32,24 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <ImageView
-            android:id="@+id/lightbulb_image"
+        <ImageButton
+            android:id="@+id/sketch_button"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/lightbulb_post"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sketch_pad"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Draw a Sketch"
+                android:textSize="15dp"
+                android:paddingBottom="10dp"
+                android:gravity="center"
+                android:textStyle="bold"/>
 
             <EditText
                 android:paddingTop="5dp"

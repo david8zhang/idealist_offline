@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -28,6 +29,16 @@ public class PostActivity extends AppCompatActivity{
 
         //Instantiate Utilities
         utils = new Utils();
+
+        //Instantiate the Drawing Pad button
+        ImageButton sketch_pad = (ImageButton)findViewById(R.id.sketch_button);
+        sketch_pad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PostActivity.this, DrawingPadActivity.class);
+                PostActivity.this.startActivity(intent);
+            }
+        });
 
         //Instantiate the actual post button
         Button post_button = (Button)findViewById(R.id.postIdea);
