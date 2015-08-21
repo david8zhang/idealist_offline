@@ -169,6 +169,7 @@ public class DrawingPadActivity extends AppCompatActivity implements View.OnClic
             saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                 public void onClick(DialogInterface dialog, int which){
                     //save drawing
+                    //TODO: Save the image somehow and set it to the imageView
                 }
             });
             saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
