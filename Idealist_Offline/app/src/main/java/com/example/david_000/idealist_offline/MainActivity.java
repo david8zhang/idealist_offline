@@ -2,6 +2,7 @@ package com.example.david_000.idealist_offline;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
@@ -26,19 +28,20 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import model.FeedItem;
 import model.FeedListAdapter;
 import utils.DatabaseHandler;
+import utils.Utils;
 
 public class MainActivity extends AppCompatActivity implements ObservableScrollViewCallbacks {
 
     //ListView, adapter, toolbars
-    private ObservableListView listView;
+    private ListView listView;
     private FeedListAdapter listAdapter;
     private List<FeedItem> ideaList;
     private Toolbar toolbar;
-    private SwipeRefreshLayout swipeLayout;
-    private String autoRefresh;
 
-    //Database handler
+    //Database handler and utils
     private DatabaseHandler db;
+    private Utils utils;
+    private Bitmap ideaImage;
 
     //Deletion parameters
     private String textToDelete;
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements ObservableScrollV
 
         //Instantiate new databasehandler
         db = new DatabaseHandler(this);
+        utils = new Utils();
 
         //Hide the toolbar
         toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -60,8 +64,7 @@ public class MainActivity extends AppCompatActivity implements ObservableScrollV
         ideaList = new ArrayList<FeedItem>();
 
         //Instantiate ArrayList, List View and Adapter
-        listView = (ObservableListView)findViewById(R.id.list);
-        listView.setScrollViewCallbacks(this);
+        listView = (ListView)findViewById(R.id.list);
         listAdapter = new FeedListAdapter(this, ideaList);
         listView.setAdapter(listAdapter);
 
@@ -151,6 +154,13 @@ public class MainActivity extends AppCompatActivity implements ObservableScrollV
                     String ideaText = cursor.getString(cursor.getColumnIndex(Constants.IDEA_TEXT));
                     System.out.println(ideaText);
                     item.setIdeaText(ideaText);
+                }
+                if(cursor.getColumnIndex(Constants.IDEA_SKETCH) > -1){
+                    byte[] image = cursor.getBlob(cursor.getColumnIndex(Constants.IDEA_SKETCH));
+//                    if(image.length > 0){
+                        ideaImage = db.getImage(image);
+                        item.setImage(ideaImage);
+//                    }
                 }
                 ideaList.add(item);
             }

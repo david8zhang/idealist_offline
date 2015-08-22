@@ -16,6 +16,8 @@ import android.util.TypedValue;
 
 import com.example.david_000.idealist_offline.R;
 
+import utils.Global;
+
 /**
  * Created by David on 8/20/15.
  */
@@ -143,6 +145,8 @@ public class DrawingView extends View {
         invalidate();
     }
 
-//    public void
+    public void saveImage(){
+        Global.img = canvasBitmap;
+    }
 
 }

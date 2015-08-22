@@ -1,17 +1,15 @@
 package com.example.david_000.idealist_offline;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import java.util.UUID;
-import android.provider.MediaStore;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.view.View.OnClickListener;
-import android.widget.Toast;
 
 import model.DrawingView;
 
@@ -55,6 +53,9 @@ public class DrawingPadActivity extends AppCompatActivity implements View.OnClic
         //New drawing button
         newBtn = (ImageButton)findViewById(R.id.new_btn);
         newBtn.setOnClickListener(this);
+
+        saveBtn = (ImageButton)findViewById(R.id.save_btn);
+        saveBtn.setOnClickListener(this);
     }
 
     public void paintClicked(View view){
@@ -169,7 +170,11 @@ public class DrawingPadActivity extends AppCompatActivity implements View.OnClic
             saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                 public void onClick(DialogInterface dialog, int which){
                     //save drawing
-                    //TODO: Save the image somehow and set it to the imageView
+                    Intent intent = new Intent(DrawingPadActivity.this, PostActivity.class);
+                    intent.putExtra("Drawn", true);
+                    drawView.saveImage();
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    DrawingPadActivity.this.startActivity(intent);
                 }
             });
             saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){

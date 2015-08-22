@@ -27,6 +27,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/ideaImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="175dp"
+                    android:visibility="visible"
+                    android:scaleType="fitCenter" />
+
                 <TextView
                     android:id="@+id/ideaTitle"
                     android:layout_width="fill_parent"

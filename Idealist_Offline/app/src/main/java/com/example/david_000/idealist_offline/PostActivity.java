@@ -1,6 +1,8 @@
 package com.example.david_000.idealist_offline;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import utils.Global;
 import utils.Utils;
 
 /**
@@ -20,6 +23,7 @@ public class PostActivity extends AppCompatActivity{
     public String ideaTitle;
     public String ideaCategory;
     public String ideaText;
+    public boolean sketch;
 
     public Utils utils;
 
@@ -30,15 +34,34 @@ public class PostActivity extends AppCompatActivity{
         //Instantiate Utilities
         utils = new Utils();
 
+
+
         //Instantiate the Drawing Pad button
         ImageButton sketch_pad = (ImageButton)findViewById(R.id.sketch_button);
         sketch_pad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PostActivity.this, DrawingPadActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 PostActivity.this.startActivity(intent);
             }
         });
+
+        if(savedInstanceState == null){
+            Bundle extras = getIntent().getExtras();
+            if(extras == null){
+                sketch = false;
+            } else {
+                sketch = extras.getBoolean("Drawn");
+            }
+        } else {
+            sketch = (Boolean)savedInstanceState.getSerializable("Drawn");
+        }
+
+        //Checks if the user saved their drawing
+        if(sketch){
+            sketch_pad.setImageBitmap(Global.img);
+        }
 
         //Instantiate the actual post button
         Button post_button = (Button)findViewById(R.id.postIdea);
@@ -57,8 +80,15 @@ public class PostActivity extends AppCompatActivity{
                             ideaTitle = ideaTitleView.getText().toString();
                             ideaCategory = ideaCategoryView.getText().toString();
                             ideaText = ideaTextView.getText().toString();
-                            utils.postIdea(PostActivity.this, ideaTitle, ideaCategory, ideaText);
 
+                            if(Global.img != null){
+                                System.out.println("There is an image");
+                                utils.postIdeaImage(PostActivity.this, ideaTitle, ideaCategory, ideaText, Global.img);
+                                Global.img = null;
+                            } else {
+                                System.out.println("No Image");
+                                utils.postIdea(PostActivity.this, ideaTitle, ideaCategory, ideaText);
+                            }
                             ideaTitleView.setText("");
                             ideaCategoryView.setText("");
                             ideaTextView.setText("");

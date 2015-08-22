@@ -2,11 +2,13 @@ package model;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -57,8 +59,15 @@ public class FeedListAdapter extends BaseAdapter {
         TextView ideaTitle = (TextView)convertView.findViewById(R.id.ideaTitle);
         TextView ideaCategory = (TextView)convertView.findViewById(R.id.ideaCategory);
         TextView ideaText = (TextView)convertView.findViewById(R.id.ideaText);
+        ImageView imageSketch = (ImageView)convertView.findViewById(R.id.ideaImage);
 
         FeedItem item = ideaList.get(position);
+
+        if(item.getImage() != null){
+            imageSketch.setImageBitmap(item.getImage());
+        } else {
+            imageSketch.setVisibility(View.GONE);
+        }
 
         //Set the text into the textViews
         ideaTitle.setText(item.getIdeaTitle());
